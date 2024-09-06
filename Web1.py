@@ -6,22 +6,18 @@ import audio
 
 app = Flask(__name__)
 
-# Global flag for stopping the function
 stop_flag = False
 
-# Home route for your HTML page
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# Route to handle form submission
 @app.route('/submit1', methods=['GET', 'POST'])
 def submit_form():
     global stop_flag
     if request.method == 'POST':
-        # Process the form submission
         print("Form submitted successfully!")
-        stop_flag = False  # Reset the flag
+        stop_flag = False 
         i = 0
         while i < 5:
             if stop_flag:
@@ -35,7 +31,7 @@ def submit_form():
                 a.recognize_speech(1)
 
             i += 1
-            time.sleep(1)  # Simulate some delay for the process
+            time.sleep(1) 
 
         if stop_flag:
             print("Function terminated by stop request.")
@@ -45,7 +41,6 @@ def submit_form():
 def submit_for1():
     global stop_flag
     if request.method == 'POST':
-        # Set the flag to stop the function
         stop_flag = True
         print("Stop signal sent.")
         audio.stop()
